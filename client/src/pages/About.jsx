@@ -11,10 +11,11 @@ const About = () => {
            </div>
            <div className="aboutUsTextContent">
                <p>
-                    Explore the world of ideas with us at BLOGII. From tech insights
+                    {/* Explore the world of ideas with us at EventEase. From tech insights
                     to lifestyle tips, we curate content that informs and inspires. Join our community
                      of avid readers, and let's embark on a journey of discovery together. Welcome to
-                      a space where words come alive, making everyday moments extraordinary.
+                      a space where words come alive, making everyday moments extraordinary. */}
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam vel iste harum modi, deserunt necessitatibus dignissimos doloribus eius laborum sint consequuntur accusantium voluptates ad maiores, aperiam, assumenda quas. Delectus, quae.
                </p>
                <span className="socialLinks">
                   

@@ -37,7 +37,7 @@ const Home = () => {
  
   return (
     <div id='homePage'>
-        <h1>All Blogs</h1>
+        <h1>All Events</h1>
         {/* <TextSlider blogsData={blogsData} setBlogsData={setBlogsData}/> */}
         {blogsData.isLoading?"Loading...":<Blogs blogsData={blogsData}/>}
     </div>

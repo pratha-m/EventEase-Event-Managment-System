@@ -123,7 +123,7 @@ const Profile = ({userData,setTopBarProgress,successToast,errorToast}) => {
             </form>
         </div>
         <div className="createBlog">
-            <h1>Create Blog</h1>
+            <h1>Create Event</h1>
             <form onSubmit={createBlog}>
                 <label htmlFor="blogTitle">Title : <input type="text" name="blogTitle" value={blogTitle} onChange={(e)=>{setBlogTitle(e.target.value)}}/></label>
                 <label htmlFor="blogDescription">Description : <textarea type="text" name="blogDescription" value={blogDescription} onChange={(e)=>{setBlogDescription(e.target.value)}}/></label>
@@ -136,14 +136,14 @@ const Profile = ({userData,setTopBarProgress,successToast,errorToast}) => {
                        })}
                     </datalist>
                 </label>
-                <button>Create Blog</button>
+                <button>Create Event</button>
             </form>
         </div>
         <div className="myBlogs">
-            <h1>My Blog Posts</h1>
+            <h1>My Events</h1>
             <div className="blogsContainer">
                 {blogsData.isLoading && "Loading..."}
-                {!blogsData.isLoading && blogsData.blogs.length<1 && "Sorry No Blogs Found"}
+                {!blogsData.isLoading && blogsData.blogs.length<1 && "Sorry No Events Found"}
                 {
                     !blogsData.isLoading && blogsData.blogs && blogsData.blogs.map((eachBlog)=>{
                     return (

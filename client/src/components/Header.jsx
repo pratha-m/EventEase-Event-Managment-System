@@ -51,7 +51,7 @@ const Header = ({userStatus,setUserStatus,userData,runUseEffNo,setRunUseEff,succ
     <input type="checkbox" id="expand-toggler"/>
     <header className="header">
         <div className="logoContainer">
-          <Link to="/">BLOGII</Link>
+          <Link to="/">EventEase</Link>
           <label htmlFor="expand-toggler" id="expand-btn">
               <img src="/images/hamburgericon.png" id="hambergerIcon" alt="" />
               <img src="/images/crossicon.png" id="crossIcon" alt="" />

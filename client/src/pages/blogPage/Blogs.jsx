@@ -13,7 +13,7 @@ const Blogs = ({blogsData}) => {
   return (
     <div className="blogsContainer">
       {blogsData.isLoading && "Loading..."}
-      {!blogsData.isLoading && blogsData.blogs.length<1 && "Sorry No Blogs Found"}
+      {!blogsData.isLoading && blogsData.blogs.length<1 && "Sorry No Events Found"}
       {
         !blogsData.isLoading && blogsData.blogs && blogsData.blogs.map((eachBlog)=>{
              return (

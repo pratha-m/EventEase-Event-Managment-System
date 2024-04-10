@@ -20,7 +20,7 @@ const Footer = () => {
     <div className="detailsSection">
        <div className="companySummary">
             <div>
-             <h2>BLOGII</h2>
+             <h2>EventEase</h2>
              <p>Explore the latest insights and trends on our vibrant blog. Stay informed, entertained, and inspired with our diverse range of articles. Join our community of readers and contributors, and discover a wealth of knowledge at your fingertips. Thank you for being part of our journey.</p>
             </div>
        </div>
