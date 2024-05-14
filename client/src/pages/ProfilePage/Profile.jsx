@@ -2,25 +2,28 @@ import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import "./Profile.css";
 import {Link} from "react-router-dom";
-
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const Profile = ({userData,setTopBarProgress,successToast,errorToast}) => {
   const [blogTitle,setBlogTitle]=useState("");
-  const [blogDescription,setBlogDescription]=useState(""); 
+  const [blogDescriptionHTML,setBlogDescriptionHTML]=useState(""); 
+  const [blogDescriptionText,setBlogDescriptionText]=useState(""); 
   const [blogImgUrl,setBlogImgUrl]=useState(""); 
   const [blogCategory,setBlogCategory]=useState("");
   const [blogsData,setBlogsData]=useState({isLoading:true,blogs:[]})
   const [blogCategories,setBlogCategories]=useState({isLoading:true,categories:[]})
 
-  const createBlog=async(e)=>{
+    const createBlog=async(e)=>{
     e.preventDefault(); 
-    if(blogTitle && blogDescription && blogImgUrl && blogCategory){
+    if(blogTitle && blogDescriptionHTML && blogImgUrl && blogCategory){
         try{
             setTopBarProgress(50);
             setBlogsData({...blogsData,isLoading:true})
             const result=await axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/post/create`,{
                 blog_title:blogTitle,
-                blog_description:blogDescription,
+                blog_description_html:blogDescriptionHTML,
+                blog_description_text:blogDescriptionText,
                 blog_image_url:blogImgUrl,
                 blog_category:blogCategory
             },{withCredentials:true});
@@ -28,7 +31,8 @@ const Profile = ({userData,setTopBarProgress,successToast,errorToast}) => {
                 setBlogsData({isLoading:false,blogs:result.data.blogs})
                 fetchAllBlogs();
                 setBlogTitle("");
-                setBlogDescription("");
+                setBlogDescriptionHTML("");
+                setBlogDescriptionText("");
                 setBlogImgUrl("");
                 setBlogCategory("");
                 setTopBarProgress(100);
@@ -50,7 +54,7 @@ const Profile = ({userData,setTopBarProgress,successToast,errorToast}) => {
     else{
         errorToast("Eneter All Fields")
     }
-  }
+    }
     const fetchUserBlogs=useCallback(async()=>{
         try{
             setBlogsData((prev)=>({...prev,isLoading:true}))
@@ -113,6 +117,11 @@ const Profile = ({userData,setTopBarProgress,successToast,errorToast}) => {
     else return "N/A";
   }
 
+  const handleEditChange=(val,delta,source,editor)=>{
+    setBlogDescriptionText(editor.getText());
+    setBlogDescriptionHTML(val);
+  }
+
   return (
     <div className="profilePage">
         <div className="myProfile">
@@ -126,7 +135,29 @@ const Profile = ({userData,setTopBarProgress,successToast,errorToast}) => {
             <h1>Create Event</h1>
             <form onSubmit={createBlog}>
                 <label htmlFor="blogTitle">Title : <input type="text" name="blogTitle" value={blogTitle} onChange={(e)=>{setBlogTitle(e.target.value)}}/></label>
-                <label htmlFor="blogDescription">Description : <textarea type="text" name="blogDescription" value={blogDescription} onChange={(e)=>{setBlogDescription(e.target.value)}}/></label>
+                <label htmlFor="blogDescription">Description : 
+                    {/* <textarea type="text" name="blogDescription" value={blogDescription} onChange={(e)=>{setBlogDescription(e.target.value)}}/> */}
+                    <div className='editorContainer' style={{  backgroundColor:"black"}}>
+                        <ReactQuill 
+                            theme="snow" 
+                            value={blogDescriptionHTML} 
+                            onChange={handleEditChange} 
+                            className='custom-editor' 
+                            style={{ width: '100%', height:'100%' }}
+                            modules={{
+                              toolbar: [
+                                  [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
+                                  [{size: []}],
+                                  ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                                  [{'list': 'ordered'}, {'list': 'bullet'}, 
+                                   {'indent': '-1'}, {'indent': '+1'}],
+                                  ['link', 'image', 'video'],
+                                  ['clean']
+                              ]
+                            }}
+                        />
+                    </div>
+                </label>
                 <label htmlFor="blogImgUrl">Url : <input type="url" name="blogImgUrl" value={blogImgUrl} onChange={(e)=>{setBlogImgUrl(e.target.value)}}/></label>
                 <label htmlFor="blogCategory">Category : <input name="blogCategory" autoComplete="off" value={blogCategory} onChange={(e)=>{setBlogCategory(e.target.value)}} list="categories" id="blogCategory"/>
                     <datalist id="categories">
@@ -155,8 +186,9 @@ const Profile = ({userData,setTopBarProgress,successToast,errorToast}) => {
                                <h2>{titleTrimming(eachBlog.blog_title)}</h2>
                                {eachBlog.blog_category && <span className="blogCategory">{eachBlog.blog_category}</span>}
                                <p>
-                                  {descriptionTrim(eachBlog.blog_description)}
-                                  {eachBlog.blog_description.length>=141 && <Link className="readMoreLink" to={`/blogs/?blogid=${eachBlog._id}`}>Read More</Link>}
+                                  {descriptionTrim(eachBlog.blog_description_text)}
+                                  {eachBlog.blog_description_text.length>=141}
+                                  <Link className="readMoreLink" to={`/blogs/?blogid=${eachBlog._id}`}>Read More</Link>
                                </p>
                            </div>
                            <div className="deleteBtn" onClick={()=>{deleteBlog(eachBlog._id)}}>

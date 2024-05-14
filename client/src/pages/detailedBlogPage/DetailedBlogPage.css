@@ -8,6 +8,7 @@
     padding: 10px;
     background-color: #121212;
     color: white;
+    min-height: 80vh;
 }
 .detailBlogPage .blogPageContainer{
    display: flex; 
