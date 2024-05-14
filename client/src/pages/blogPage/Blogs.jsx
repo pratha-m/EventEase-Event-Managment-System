@@ -24,8 +24,9 @@ const Blogs = ({blogsData}) => {
                     <div className="eachBlogText">
                         <h2>{titleTrimming(eachBlog.blog_title)}</h2>
                         {eachBlog.blog_category && <span className="blogCategory">{eachBlog.blog_category}</span>}
-                        <p>{descriptionTrim(eachBlog.blog_description)}
-                          {eachBlog.blog_description.length>=141 && <Link to={`/blogs/?blogid=${eachBlog._id}`} className="readMoreLink">Read More</Link>}
+                        <p>{descriptionTrim(eachBlog.blog_description_text)}
+                          {eachBlog.blog_description_text?.length>=141}
+                          <Link to={`/blogs/?blogid=${eachBlog._id}`} className="readMoreLink">Read More</Link>
                         </p>
                     </div>
                 </div>

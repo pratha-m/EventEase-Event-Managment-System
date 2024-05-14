@@ -49,3 +49,26 @@
     width: max-content;
     font-weight: bold;
 }
+.editorContainer{
+    width: 96%;
+    height: 500px;
+    color:white;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 5px;
+    border: 1px solid white;
+}
+.custom-editor .ql-container {
+    backgroundColor:black;
+    max-height: 86%;
+    font-size: 20px;
+}
+.custom-editor .ql-container.ql-snow{
+    border:none;
+}
+.custom-editor .ql-toolbar.ql-snow{
+    border: none;
+    border-style: none none solid none;
+    border-color: white;
+    border-width: 0.5px;
+}

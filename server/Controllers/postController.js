@@ -1,47 +1,57 @@
+import Blog from "../Models/blogModel.js";
 import User from "../Models/userModel.js";
 
 const createPost=async(req,res)=>{
     try{
-        const {blog_title,blog_description,blog_image_url,blog_category}=req.body;
+        const userId=req.userId;
+        const {blog_title,blog_description_html,blog_description_text,blog_image_url,blog_category}=req.body;
 
         const user=await User.findById(req.userId);
 
-        user.blogs.push({blog_title,blog_description,blog_image_url,blog_category})
+        if(!user) return res.status(404).json({success:false,message:"User Not Found"});
+
+        await Blog.create({
+            blog_title:blog_title,
+            blog_description_html:blog_description_html,
+            blog_description_text:blog_description_text,
+            blog_image_url:blog_image_url,
+            blog_category:blog_category,
+            user_id:userId
+        })
+
+        const blogs=await Blog.find({});
 
         await user.save();
 
-        res.status(200).send({success:true,message:"Post created successfully",blogs:user.blogs});
+        res.status(200).send({success:true,message:"Post created successfully",blogs:blogs});
     }
     catch(error){
-        res.status(500).send({success:false,message:"Error in Creating Post"});
+        res.status(500).send({success:false,message:"Error in Creating Event",error:error.message});
     }
 }
 const getUserBlogs=async(req,res)=>{
    try{
-      const user=await User.findById(req.userId);
+      const userId=req.userId;
 
-      let blogs=user.blogs || [];
+      const blogs=await Blog.find({user_id:userId});
 
-      res.status(200).send({success:true,message:"get blogs successfully",blogs});
+      res.status(200).send({success:true,message:"get blogs successfully",blogs:blogs});
    }
    catch(error){
-       res.status(500).send({success:false,message:"Error in getting Posts"});
+       res.status(500).send({success:false,message:"Error in getting Events",error:error.message});
    }   
 }
 const getAllBlogs=async(req,res)=>{
     try{
-        const users=await User.find({});
+        const blogs=await Blog.find({});
 
-        const blogs=[];
-        const blog_categories=[];
+        let blog_categories=[];
 
-        users.map((eachUser)=>{
-            eachUser.blogs.map((eachBlog)=>{
-              blogs.push(eachBlog);
-              if(eachBlog.blog_category) !blog_categories.includes(eachBlog.blog_category) && blog_categories.push(eachBlog.blog_category)
-            })
+        blogs.forEach((eachBlog)=>{
+            const {blog_category}=eachBlog;
+            if(!blog_categories.includes(blog_category)) blog_categories.push(blog_category);
         })
-  
+       
         res.status(200).send({success:true,message:"get blogs successfully",blogs,blog_categories});
      }
      catch(error){
@@ -54,38 +64,54 @@ const deleteBlog=async(req,res)=>{
 
         const user=await User.findById(req.userId);
 
-        user.blogs=user.blogs.filter((eachBlog)=>{return eachBlog._id!=blogId});
+        if(!user) return res.status(404).json({success:false,message:"User Not Found"});
 
-        await user.save();
+        await Blog.findByIdAndDelete(blogId);
 
-        res.status(200).send({success:true,message:"Post created successfully",blogs:user.blogs});
+        const blogs=await Blog.find({});
+        
+        res.status(200).send({success:true,message:"Event delted successfully",blogs:blogs});
     }
     catch(error){
-        res.status(500).send({success:false,message:"Error in Creating Post",error:error.message});
+        res.status(500).send({success:false,message:"Error in Deleting Event",error:error.message});
     }
 }
 const getEachBlog=async(req,res)=>{
     try{
         const {blogId}=req.body;
 
-        const users=await User.find({});
+        const findBlog=await Blog.findById(blogId);
 
-        let blog={};
-
-        users.map((eachUser)=>{
-            eachUser.blogs.map((eachBlog)=>{
-                 if(eachBlog._id==blogId){
-                    blog=eachBlog;
-                 }  
-            })
-        })
-
-        if(Object.keys(blog).length===0) return res.status(500).send({success:false,message:"Error in getting Blog",error:"This Blog Not Exists"});
-  
-        res.status(200).send({success:true,message:"get blog successfully",blog});
+        res.status(200).send({success:true,message:"get blog successfully",blog:findBlog});
      }
      catch(error){
          res.status(500).send({success:false,message:"Error in getting Blog",error:error.message});
      }  
 }
-export {createPost,getUserBlogs,getAllBlogs,deleteBlog,getEachBlog};
+const registerEvent=async(req,res)=>{
+    try{
+        const {eventId}=req.params;
+
+        const userId=req.userId;
+
+        if(!userId || !eventId) return res.status(404).send({success:false,message:"Event Not Found"});
+
+        const user=await User.find({_id:userId});        
+
+        if(!user) return res.status(404).send({success:false,message:"User Not Found"});
+
+        const event=Blog.findById(eventId);
+
+        const {registered_users}=event;
+
+        if(registered_users.includes(userId)) return res.status(404).send({success:false,message:"User Already Registered For this event"});
+
+        event.registered_users.push(userId);
+
+        res.status(200).send({success:true,message:"Registered Event Successfully"});
+    }
+    catch(error){
+        res.status(500).send({success:false,message:"Error in Registering Event",error:error.message});
+    }
+}
+export {createPost,getUserBlogs,getAllBlogs,deleteBlog,getEachBlog,registerEvent};

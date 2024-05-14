@@ -3,6 +3,8 @@ import { useCallback, useEffect, useState } from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import "./DetailedBlogPage.css";
 // import TextSlider from "../../components/textSlider/TextSlider";
+import parse from "html-react-parser";
+
 
 const DetailedBlogPage=()=>{
   const [eachBlog,setEachBlog]=useState({isLoading:true,blog:{}});  
@@ -37,7 +39,7 @@ const DetailedBlogPage=()=>{
            <div className="blogImage">
              <img src={eachBlog.blog.blog_image_url} alt="" />
            </div>
-           <div className="blogDescription">{eachBlog.blog.blog_description}</div>
+           <div className="blogDescription">{eachBlog.blog.blog_description_html && parse(eachBlog.blog.blog_description_html)}</div>
         </div>
     </div>
   )
