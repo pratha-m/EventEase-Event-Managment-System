@@ -33,15 +33,44 @@ const DetailedBlogPage=()=>{
   },[getEachBlog])
 
   return (
-    <div className="detailBlogPage">
-        <div className="blogPageContainer">
-           <h1 className="blogTitle">{eachBlog.blog.blog_title}</h1>  
-           <div className="blogImage">
-             <img src={eachBlog.blog.blog_image_url} alt="" />
-           </div>
-           <div className="blogDescription">{eachBlog.blog.blog_description_html && parse(eachBlog.blog.blog_description_html)}</div>
+    // <div className="detailBlogPage">
+    //     <div className="blogPageContainer">
+    //        <h1 className="blogTitle">{eachBlog.blog.blog_title}</h1>  
+    //        <div className="blogImage">
+    //          <img src={eachBlog.blog.blog_image_url} alt="" />
+    //        </div>
+    //        <div className="blogDescription">{eachBlog.blog.blog_description_html && parse(eachBlog.blog.blog_description_html)}</div>
+    //     </div>
+    // </div>
+
+    <div className="detailEventPage">
+    <div className="eventPageContainer">
+      <div className="Image">
+        <img src={eachBlog.blog.blog_image_url}
+          className="Image"
+        ></img>
+      </div>
+
+      <h1 className="eventTitle">{eachBlog.blog.blog_title}</h1> {/* Title of the event */}
+      <div className = "Register">
+        <div className = "registerDate">
+        <h4>Deadline to register: 10/06/2024 </h4></div> {/* Last date */}
+
+        <div className = "registerButton">
+          <button className="button-74" role="button">  Register  </button> {/* API */}
         </div>
+        
+      </div>
+
+      {/* <h2 className="eventTitle">Event specifics</h2> */}
+
+      <div className="eventDescription" >
+        <p>
+        {eachBlog.blog.blog_description_html && parse(eachBlog.blog.blog_description_html)}
+        </p> {/* Blog description along with the styling as given by the user if possible */}
+      </div>
     </div>
+  </div>
   )
 }
 

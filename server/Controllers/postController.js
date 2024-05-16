@@ -92,7 +92,7 @@ const registerEvent=async(req,res)=>{
     try{
         const {eventId}=req.params;
 
-        const userId=req.userId;
+        const userId=req.body.userId;
 
         if(!userId || !eventId) return res.status(404).send({success:false,message:"Event Not Found"});
 
@@ -104,9 +104,9 @@ const registerEvent=async(req,res)=>{
 
         const {registered_users}=event;
 
-        if(registered_users.includes(userId)) return res.status(404).send({success:false,message:"User Already Registered For this event"});
+        if(!registered_users.includes(userId)) event.registered_users.push(userId);
 
-        event.registered_users.push(userId);
+        await event.save();
 
         res.status(200).send({success:true,message:"Registered Event Successfully"});
     }
