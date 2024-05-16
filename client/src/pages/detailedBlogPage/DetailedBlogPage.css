@@ -46,3 +46,130 @@
     align-self: center;
     white-space: pre-line;
 }
+
+
+
+
+
+
+
+.Image{
+    /* background-color: #9D4EDD; */
+    /* max-height:10000px; */
+    display: flex;
+    max-width:70%;
+    align-self:center;
+    align-items:center;
+    color:#DFC8F0;
+    justify-content: center;
+    padding: 20px;
+  }
+  .button-74 {
+    background-color: #9D4EDD;
+    /* border: 2px solid #434044; */
+    border-radius: 10px;
+    /* box-shadow: #434044 4px 4px 0 0; */
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    max-width: 20%;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 0 15px;
+    line-height: 45px;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    align-self:center;
+  }
+  
+  .button-74:hover {
+    background-color:#DFC8F0;
+    color:#9D4EDD;
+  }
+  
+  .button-74:active {
+    box-shadow: #434044 1px 1px 0 0;
+    transform: translate(2px, 2px);
+  }
+  
+  @media (min-width: 768px) {
+    .button-74 {
+      min-width: 120px;
+      padding: 0 25px;
+    }
+  }
+  
+  .detailEventPage{
+      margin-top: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: max-content;
+      padding: 10px;
+      background-color: #fdf7f7;
+      color: #434044;
+  }
+  .detailEventPage .eventPageContainer{
+     display: flex; 
+     flex-direction: column;
+     /* align-items:center; */
+  }
+  .detailEventPage .eventPageContainer h1{
+      font-size: 40px;
+      font-weight: 900;
+      max-width: 80%;
+      align-self: center;
+  }
+  .detailEventPage .eventPageContainer h2{
+    
+      align-self: center;
+  }
+  
+  .detailEventPage .eventPageContainer .eventImage{
+      max-width: 100%;
+      width: auto;
+      height: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow: hidden;
+      border-radius: 20px;
+  }
+  .detailEventPage .eventPageContainer .eventImage img{
+      max-width: 100%;
+      max-height: 100%;
+      width: 80%;
+      height: auto;
+      border-radius: 20px;
+  }
+  .detailEventPage .eventPageContainer .eventDescription{
+      line-height: 28px;
+      font-size: 18px;
+      max-width: 80%;
+      align-self: center;
+      white-space: pre-line;
+  }
+  
+  .Register {
+    margin: 1rem;
+    padding: 2rem 2rem;
+    display: flex;
+    justify-content: space-between; 
+  }
+  
+  .registerDate {
+    
+    padding-left: 2rem;
+  }
+  
+  .registerButton {
+    
+    padding-right: 2rem;
+    padding-left: 10rem;
+  }
+  
