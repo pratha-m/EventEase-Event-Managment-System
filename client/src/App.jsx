@@ -17,12 +17,13 @@ import ErrorPage from './pages/errorPage/ErrorPage';
 import Profile from './pages/ProfilePage/Profile';
 import DetailedBlogPage from './pages/detailedBlogPage/DetailedBlogPage';
 import TextSlider from './components/textSlider/TextSlider';
+import EventRegUsers from './pages/RegisteredUsers/EventRegUsers';
 // import ProtectedRoute from './pages/protectedRoute/ProtectedRoute';
 
 function App() {
   const [topBarProgress,setTopBarProgress]=useState(0);
   const [userStatus,setUserStatus]=useState({isLoggedIn:false,isAdmin:false,isFetching:true})
-  const [userData,setUserData]=useState({name:"",email:""});
+  const [userData,setUserData]=useState({name:"",email:"",id:""});
   const [runUseEffNo,setRunUseEff]=useState(0);
 
   useEffect(()=>{
@@ -31,15 +32,15 @@ function App() {
         setUserStatus({...userStatus,isFetching:true});
         const result=await axios.get(`${import.meta.env.VITE_BASE_URL}/api/v1/user/profile`,{withCredentials:true});
         if(result.status===200){
-          const {isAdmin,email,name}=result.data.user;
-          setUserData({name:name,email:email});
+          const {isAdmin,email,name,_id}=result.data.user;
+          setUserData({name:name,email:email,id:_id});
           if(isAdmin) setUserStatus({isLoggedIn:true,isAdmin:true,isFetching:false});
           else setUserStatus({isLoggedIn:true,isAdmin:false,isFetching:false});
         }
       }
       catch(error){
         if(error.response){
-          setUserData({name:"",email:""});
+          setUserData({name:"",email:"",id:""});
           setUserStatus({isLoggedIn:false,isAdmin:false,isFetching:false});
         }
         setUserStatus({...userStatus,isFetching:false});
@@ -90,8 +91,9 @@ function App() {
             <Route exact path='/contact' element={<Contact/>}/>
             <Route exact path='/forgotpassword' element={<ForgotPassword setTopBarProgress={setTopBarProgress} successToast={successToast} errorToast={errorToast}/>}/>
             {userStatus.isLoggedIn && <Route exact path='/profile' element={<Profile setTopBarProgress={setTopBarProgress} successToast={successToast} errorToast={errorToast} userData={userData} userStatus={userStatus}/>}/>}
-            <Route exact path='/blogs/*' element={<DetailedBlogPage />}/>
+            <Route exact path='/blogs/*' element={<DetailedBlogPage userData={userData} userStatus={userStatus} runUseEffNo={runUseEffNo} successToast={successToast} errorToast={errorToast} setTopBarProgress={setTopBarProgress}/>}/>
             <Route exact path='/slider' element={<TextSlider />}/>
+            <Route exact path='/event-users/*' element={<EventRegUsers setTopBarProgress={setTopBarProgress}/>}/>
             {/* <Route exact 
                 path='/profile' 
                 element={<ProtectedRoute element={<Profile setTopBarProgress={setTopBarProgress} successToast={successToast} errorToast={errorToast} userData={userData}/>} fallbackPath="/" userStatus={userStatus}/>}
@@ -100,9 +102,10 @@ function App() {
           </Routes>
       <Footer/>
       <LoadingBar
-        color='#f11946'
+        color='gray'
         progress={topBarProgress}
         onLoaderFinished={()=>setTopBarProgress(0)}
+        height={4}
       />
       <ToastContainer
         position="top-right"

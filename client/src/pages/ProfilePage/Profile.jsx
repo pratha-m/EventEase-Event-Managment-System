@@ -13,10 +13,12 @@ const Profile = ({userData,setTopBarProgress,successToast,errorToast}) => {
   const [blogCategory,setBlogCategory]=useState("");
   const [blogsData,setBlogsData]=useState({isLoading:true,blogs:[]})
   const [blogCategories,setBlogCategories]=useState({isLoading:true,categories:[]})
+  const [eventDeadline,setEventDeadline]=useState("");
 
     const createBlog=async(e)=>{
     e.preventDefault(); 
-    if(blogTitle && blogDescriptionHTML && blogImgUrl && blogCategory){
+    console.log(eventDeadline)
+    if(blogTitle && blogDescriptionHTML && blogImgUrl && blogCategory && eventDeadline){
         try{
             setTopBarProgress(50);
             setBlogsData({...blogsData,isLoading:true})
@@ -25,7 +27,8 @@ const Profile = ({userData,setTopBarProgress,successToast,errorToast}) => {
                 blog_description_html:blogDescriptionHTML,
                 blog_description_text:blogDescriptionText,
                 blog_image_url:blogImgUrl,
-                blog_category:blogCategory
+                blog_category:blogCategory,
+                deadline:eventDeadline
             },{withCredentials:true});
             if(result.status==200){
                 setBlogsData({isLoading:false,blogs:result.data.blogs})
@@ -35,6 +38,7 @@ const Profile = ({userData,setTopBarProgress,successToast,errorToast}) => {
                 setBlogDescriptionText("");
                 setBlogImgUrl("");
                 setBlogCategory("");
+                setEventDeadline("");
                 setTopBarProgress(100);
                 successToast("Blog Created Successfully")
             }
@@ -122,6 +126,11 @@ const Profile = ({userData,setTopBarProgress,successToast,errorToast}) => {
     setBlogDescriptionHTML(val);
   }
 
+  const today=new Date();
+  const tomorrow=new Date(today);
+  tomorrow.setDate(today.getDate() + 1);
+  const minDate=tomorrow.toISOString().split('T')[0];
+
   return (
     <div className="profilePage">
         <div className="myProfile">
@@ -135,6 +144,7 @@ const Profile = ({userData,setTopBarProgress,successToast,errorToast}) => {
             <h1>Create Event</h1>
             <form onSubmit={createBlog}>
                 <label htmlFor="blogTitle">Title : <input type="text" name="blogTitle" value={blogTitle} onChange={(e)=>{setBlogTitle(e.target.value)}}/></label>
+                <label htmlFor="eventDeadline">Event Deadline : <input type="date" name="eventDeadline" value={eventDeadline} onChange={(e)=>{setEventDeadline(e.target.value)}} min={minDate}/></label>
                 <label htmlFor="blogDescription">Description : 
                     {/* <textarea type="text" name="blogDescription" value={blogDescription} onChange={(e)=>{setBlogDescription(e.target.value)}}/> */}
                     <div className='editorContainer' style={{  backgroundColor:"black"}}>
@@ -188,7 +198,8 @@ const Profile = ({userData,setTopBarProgress,successToast,errorToast}) => {
                                <p>
                                   {descriptionTrim(eachBlog.blog_description_text)}
                                   {eachBlog.blog_description_text.length>=141}
-                                  <Link className="readMoreLink" to={`/blogs/?blogid=${eachBlog._id}`}>Read More</Link>
+                                    <Link className="readMoreLink" to={`/blogs/?blogid=${eachBlog._id}`}>Read More</Link>
+                                    <Link className="readMoreLink" to={`/event-users/?blogid=${eachBlog._id}`}>Registered Users</Link>
                                </p>
                            </div>
                            <div className="deleteBtn" onClick={()=>{deleteBlog(eachBlog._id)}}>

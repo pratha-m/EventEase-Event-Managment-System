@@ -37,5 +37,7 @@ const milliSecToMinute=(milliSeconds)=>{
 const minuteToMilliSec=(minute)=>{
     return minute*60*1000;
 }
-
-export {generateToken,otpGenerator,deleteUserCookie,createUserCookie,milliSecToMinute,minuteToMilliSec};
+const milliSecToHour=(milliSeconds)=>{
+    return (milliSeconds/1000)/60/60;
+}
+export {generateToken,otpGenerator,deleteUserCookie,createUserCookie,milliSecToMinute,minuteToMilliSec,milliSecToHour};
