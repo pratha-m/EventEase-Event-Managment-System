@@ -23,4 +23,5 @@ userRouter.put("/changepassword",changePassword);
 
 userRouter.post("/logout",isAuthenticated,logout);
 
+
 export default userRouter;
