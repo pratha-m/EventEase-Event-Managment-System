@@ -75,6 +75,7 @@
 .blogsContainer .eachBlog .eachBlogText p{
   font-size: 15px;
   color: rgb(120, 111, 111);
+  word-wrap: break-word;
 }
 .blogsContainer .eachBlog .eachBlogText p .readMoreLink{
    padding-left: 4px;

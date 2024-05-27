@@ -28,7 +28,11 @@ const blogSchema=mongoose.Schema({
     registered_users:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"User"
-    }]
+    }],
+    deadline:{
+        type:Date,
+        required:true
+    }
 })
 const Blog=mongoose.model("Blog",blogSchema);
 

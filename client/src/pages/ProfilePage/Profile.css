@@ -57,6 +57,7 @@
     overflow: hidden;
     margin-top: 5px;
     border: 1px solid white;
+    max-width: 800px;
 }
 .custom-editor .ql-container {
     backgroundColor:black;
