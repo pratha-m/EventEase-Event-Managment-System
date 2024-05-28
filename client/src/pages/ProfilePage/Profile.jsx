@@ -40,7 +40,7 @@ const Profile = ({userData,setTopBarProgress,successToast,errorToast}) => {
                 setBlogCategory("");
                 setEventDeadline("");
                 setTopBarProgress(100);
-                successToast("Blog Created Successfully")
+                successToast("Event Created Successfully")
             }
         }
         catch(error){
@@ -51,7 +51,7 @@ const Profile = ({userData,setTopBarProgress,successToast,errorToast}) => {
                 errorToast(error.response.data.message)
             }
             else{
-                errorToast("Error in creating Blog")
+                errorToast("Error in creating Event")
             }
         }
     }
@@ -73,7 +73,7 @@ const Profile = ({userData,setTopBarProgress,successToast,errorToast}) => {
                 console.log(error.response.data.message)
             }
             else{
-                console.log("error in getting Blogs");
+                console.log("error in getting Events");
             }
         }
     },[])
@@ -91,7 +91,7 @@ const Profile = ({userData,setTopBarProgress,successToast,errorToast}) => {
                 console.log(error.response.data.message)
             }
             else{
-                console.log("error in getting Blogs");
+                console.log("error in getting Events");
             }
         }
     },[])
@@ -109,7 +109,7 @@ const Profile = ({userData,setTopBarProgress,successToast,errorToast}) => {
     catch(error){
       setBlogsData({...blogsData,isLoading:false})
       if(error.response) console.log(error.response.data.message)
-      else console.log("error in creating Post")
+      else console.log("error in creating Event")
     }
   }
   const titleTrimming=(title)=>{
@@ -147,7 +147,7 @@ const Profile = ({userData,setTopBarProgress,successToast,errorToast}) => {
                 <label htmlFor="eventDeadline">Event Deadline : <input type="date" name="eventDeadline" value={eventDeadline} onChange={(e)=>{setEventDeadline(e.target.value)}} min={minDate}/></label>
                 <label htmlFor="blogDescription">Description : 
                     {/* <textarea type="text" name="blogDescription" value={blogDescription} onChange={(e)=>{setBlogDescription(e.target.value)}}/> */}
-                    <div className='editorContainer' style={{  backgroundColor:"black"}}>
+                    <div className='editorContainer' style={{  backgroundColor:"transparent"}}>
                         <ReactQuill 
                             theme="snow" 
                             value={blogDescriptionHTML} 

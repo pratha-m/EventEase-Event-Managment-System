@@ -25,7 +25,7 @@ const createPost=async(req,res)=>{
 
         await user.save();
 
-        res.status(200).send({success:true,message:"Post created successfully",blogs:blogs});
+        res.status(200).send({success:true,message:"Event created successfully",blogs:blogs});
     }
     catch(error){
         res.status(500).send({success:false,message:"Error in Creating Event",error:error.message});
@@ -37,7 +37,7 @@ const getUserBlogs=async(req,res)=>{
 
       const blogs=await Blog.find({user_id:userId});
 
-      res.status(200).send({success:true,message:"get blogs successfully",blogs:blogs});
+      res.status(200).send({success:true,message:"get Events successfully",blogs:blogs});
    }
    catch(error){
        res.status(500).send({success:false,message:"Error in getting Events",error:error.message});
@@ -54,10 +54,10 @@ const getAllBlogs=async(req,res)=>{
             if(!blog_categories.includes(blog_category)) blog_categories.push(blog_category);
         })
        
-        res.status(200).send({success:true,message:"get blogs successfully",blogs,blog_categories});
+        res.status(200).send({success:true,message:"get Events successfully",blogs,blog_categories});
      }
      catch(error){
-         res.status(500).send({success:false,message:"Error in getting Posts",error:error.message});
+         res.status(500).send({success:false,message:"Error in getting Events",error:error.message});
      }   
 }
 const deleteBlog=async(req,res)=>{
@@ -72,7 +72,7 @@ const deleteBlog=async(req,res)=>{
 
         const blogs=await Blog.find({user_id:req.userId});
         
-        res.status(200).send({success:true,message:"Event delted successfully",blogs:blogs});
+        res.status(200).send({success:true,message:"Event deleted successfully",blogs:blogs});
     }
     catch(error){
         res.status(500).send({success:false,message:"Error in Deleting Event",error:error.message});
@@ -84,10 +84,10 @@ const getEachBlog=async(req,res)=>{
 
         const findBlog=await Blog.findById(blogId);
 
-        res.status(200).send({success:true,message:"get blog successfully",blog:findBlog});
+        res.status(200).send({success:true,message:"get Event successfully",blog:findBlog});
      }
      catch(error){
-         res.status(500).send({success:false,message:"Error in getting Blog",error:error.message});
+         res.status(500).send({success:false,message:"Error in getting Event",error:error.message});
      }  
 }
 const registerEvent=async(req,res,next)=>{
@@ -150,7 +150,7 @@ const eventRegisteredUsers=async(req,res)=>{
         res.status(200).send({success:true,message:"get Registered Users successfully",details:populateBlog});
     }
     catch(error){
-        res.status(500).send({success:false,message:"Error in Gettinh Registered Users",error:error.message});
+        res.status(500).send({success:false,message:"Error in Getting Registered Users",error:error.message});
     }
 }
 export {createPost,getUserBlogs,getAllBlogs,deleteBlog,getEachBlog,registerEvent,eventRegisteredUsers};
