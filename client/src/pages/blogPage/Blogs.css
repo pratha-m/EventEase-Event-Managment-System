@@ -6,20 +6,21 @@
    flex-wrap: wrap;
    padding:20px 0px;
    gap: 20px;
-   background-color: #121212;
+   background-color: rgb(243, 239, 239);
 }
 .blogsContainer .eachBlog{
-  background-color: black;
+  background-color: transparent;
   width: 320px;
   height: 380px;
   display: flex;
   flex-direction: column;
   border-radius: 15px;
   overflow: hidden;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+  box-shadow: 1.5px 1.5px 3px 2px rgba(0,0,0,0.2);
   position: relative;
   padding: 10px;
-  color: white;
+  color: black;
+  backdrop-filter:blur(5px);
 }
 .blogsContainer .eachBlog .deleteBtn{
   height: 30px;
@@ -64,6 +65,7 @@
 .blogsContainer .eachBlog .eachBlogText .blogCategory{
   padding: 8px 10px;
   background: #121212;
+  color: aquamarine;
   border-radius: 20px;
   font-size: 14px;
   width: max-content;

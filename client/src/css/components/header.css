@@ -11,7 +11,7 @@ header{
     width: 100%;
     backdrop-filter: blur(5px);
     padding: 0px 12px;
-    background-color:black;
+    background-color:rgb(243, 239, 239);
     user-select: none;
     top: 0;
 
@@ -47,16 +47,16 @@ header>.signInBtnContainer>.userDropdown>.eachOption{
     display: flex;
     align-items: center;
     padding: 5px;
-    color: white;
-    background-color:black;
+    color: black;
+    background-color:rgb(243, 239, 239);
     cursor: pointer;
 }
 header>.signInBtnContainer>.userDropdown>.eachOption>a{
-    color: white;
+    color: black;
     text-decoration: none;
 }
 header>.signInBtnContainer>.userDropdown>.eachOption:hover{
-    background-color: #121212;
+    background-color: rgb(236, 233, 233);
 }
 header>.signInBtnContainer>button{
     font-size: 1.2rem;
@@ -86,7 +86,7 @@ header>.logoContainer{
 }
 header>.logoContainer>a{
     text-decoration: none;
-    color:white;
+    color:black;
     font-weight:900;
 }
 /*  #4e6bff */
@@ -110,7 +110,7 @@ header>nav>ul>li{
 }
 header>nav>ul>li>a{
     text-decoration: none;
-    color: white;
+    color: black;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 header>nav>ul>li>a:hover{

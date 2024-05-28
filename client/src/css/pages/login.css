@@ -1,14 +1,14 @@
 .loginContainer{
     position: relative;
     width: 450px;
-    background-color: black;
+    background-color: rgb(243, 239, 239);
     height:max-content;
     padding-top: 40px;
     border-radius: 10px;
     padding-bottom: 20px;
     box-shadow: rgba(0,0,0,0.15) 1.95px 1.95px 5.6px 1.95px;
     margin:114px auto 38px auto;
-    color: white;
+    color: black;
 }
 .loginContainer h2{
    text-align: center;
@@ -25,7 +25,7 @@
 }
 .loginContainer form label{
     font-size: 1rem;
-    color: white;
+    color: black;
     font-weight: bold;
     padding-top: 30px;
     margin-bottom: 2px;
@@ -42,8 +42,8 @@
     font-size: 1rem;
     margin-left: 25px;
     outline: none;
-    background-color: #121212;
-    color: white;
+    background-color: rgb(243, 239, 239);
+    color: black;
 }
 .loginContainer p{
     color: grey;

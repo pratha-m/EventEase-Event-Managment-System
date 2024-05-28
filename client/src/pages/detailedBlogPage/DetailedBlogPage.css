@@ -114,8 +114,8 @@
       width: 100%;
       height: max-content;
       padding: 10px;
-      background-color: #121212;
-      color: white;
+      background-color: rgb(243, 239, 239);
+      color: black;
   }
   .detailEventPage .eventPageContainer{
      display: flex; 

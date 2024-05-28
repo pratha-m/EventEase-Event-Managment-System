@@ -2,6 +2,7 @@
   background-color: gray;
 }
 body{
-  background-color: #121212;
-  color: white;
+  /* 121212 */
+  background-color: rgb(243, 239, 239);
+  color: black;
 }

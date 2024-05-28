@@ -57,11 +57,11 @@
     transition: all 0.5s;
     background: transparent;
     backdrop-filter: blur(34px);
-    box-shadow: 0.5px 0.5px 4px rgba(0,0,0,0.3);
-    background-color: black;
+    box-shadow: 0.5px 0.5px 4px rgb(69, 69, 69);
+    background-color: white;
 }
 .imageSlider .navBtns .navBtnsInner div:hover{
-    background-color: white;
+    background-color: black;
 }
 .imageSlider .prenextBtns button{
     height: 40px;
