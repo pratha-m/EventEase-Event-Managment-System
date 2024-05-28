@@ -6,8 +6,8 @@
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;   
     padding-bottom: 0px;
     margin-top: 70px;
-    background: #121212;
-    color: white;
+    background: rgb(243, 239, 239);
+    color: black;
 }
 .about>.aboutUsHead,
 .contact>.contactPageHead{
@@ -22,7 +22,7 @@
 }
 .about>.aboutUsHead>span,
 .contact>.contactPageHead>span{
-    color: white;
+    color: black;
     margin-left: 15px;
 }
 .about>.aboutUsMainContent,
@@ -131,7 +131,7 @@
    justify-content: space-evenly;
    border-radius: 20px;
    background-color: transparent;
-   box-shadow: 1px 1px 4px black;
+   box-shadow: 1px 1px 4px rgba(0,0,0,0.4);
    
 }
 .contact>.contactPageMain>.contactPageTextContent>.contactForm>input{
@@ -144,8 +144,9 @@
     padding-left: 5px;
     /* border: 1px solid #8e8ea2; */
     margin: 5px;
-    background-color: black;
-    color: white;
+    background-color: rgb(243, 239, 239);
+    color: black;
+    box-shadow: rgba(0,0,0,0.15) 1px 1px 2px 1px;
 }
 .contact>.contactPageMain>.contactPageTextContent>.contactForm>textarea{
     height: 100px;
@@ -159,8 +160,8 @@
     min-height: 100px;
     min-width: 90%;
     /* border: 1px solid #8e8ea2; */
-    background-color:black;
-    color: white;
+    background-color:rgb(243, 239, 239);
+    color: black;
     margin: 5px;
 }
 .contact>.contactPageMain>.contactPageTextContent>.contactForm>button{
